@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
-import { CircularProgress, Typography, Container, Box } from '@mui/material'
+import { CircularProgress, Typography, Container, Box, Button } from '@mui/material'
 
 const ResultPage = () => {
     const router = useRouter()
@@ -77,7 +77,11 @@ const ResultPage = () => {
                     </>
                 ) : (
                     <>
-                        <Typography variant='h4'>Payment Failed</Typography>
+                        <Typography variant='h4'>Payment Failed
+                            <div gutterBottom>
+                            <Button color='primary' href='/'>Return Home</Button>
+                            </div>
+                        </Typography>
                         <Box sx={{ mt: 22 }}>
                             <Typography variant='body1'>
                                 Your payment was not successful. Please try again.

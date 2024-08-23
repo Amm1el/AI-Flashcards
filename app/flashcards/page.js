@@ -6,7 +6,7 @@ import {useEffect, useState } from 'react'
 import { doc, getDoc, setDoc, collection } from 'firebase/firestore'
 import { db } from '@/firebase'
 import { useRouter } from 'next/navigation'
-import { Typography, Container, Grid, Card, CardActionArea, CardContent } from '@mui/material'
+import { Typography, Container, Grid, Card, CardActionArea, CardContent, AppBar, Toolbar, Button,  } from '@mui/material'
 
 export default function Flashcards() {
     const {isLoaded, isSignedIn, user} = useUser()
@@ -38,7 +38,18 @@ export default function Flashcards() {
         router.push(`/flashcard?id=${id}`)
     }
 
-    return <Container maxWidth = '100vw'>
+    return ( 
+
+    <Container 
+        maxWidth='100vw'>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant = "h6" style={{flexGrow: 1}}>
+                        SmartCards
+                    </Typography>
+                        <Button href='/' color='inherit'>Home</Button>
+                </Toolbar>
+            </AppBar>
         <Grid container spacing = {3} sx={{
             mt: 4
         }}>
@@ -61,4 +72,5 @@ export default function Flashcards() {
             ))}
         </Grid>
     </Container>
+    )
 }

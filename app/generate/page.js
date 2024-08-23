@@ -18,6 +18,8 @@ import {
   Card,
   CardActionArea,
   CardContent,
+  AppBar,
+  Toolbar,
 } from '@mui/material'
 import { useUser } from '@clerk/nextjs'
 import { writeBatch, doc, collection, getDoc } from 'firebase/firestore'
@@ -90,7 +92,17 @@ export default function Generate() {
     router.push('/flashcards')
   }
 
+
   return <Container maxWidth='md'>
+
+  <AppBar position="static">
+    <Toolbar>
+      <Typography variant = "h6" style={{flexGrow: 1}}>
+        SmartCards</Typography>
+      <Button href='/' color='inherit'>Home</Button>
+    </Toolbar>
+  </AppBar>
+
     <Box sx={{
       mt: 4,
       mb: 6,
