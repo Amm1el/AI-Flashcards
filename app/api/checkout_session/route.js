@@ -28,39 +28,59 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
-    try {
-        const params = {
-            mode: 'subscription',
-            payment_method_types: ['card'],
-            line_items: [
-              {
-                price_data: {
-                  currency: 'usd',
-                  product_data: {
-                    name: 'Pro subscription',
-                  },
-                  unit_amount: formatAmountForStripe(10, 'usd'),
-                  recurring: {
-                    interval: 'month',
-                    interval_count: 1,
-                  },
+  try {
+      const { pricePlan } = await req.json(); // Extract pricePlan from the request body
+
+      if (!pricePlan) {
+          throw new Error('Price plan is required')
+      }
+
+      let unitAmount;
+      let productName;
+
+      // Determine the amount and product name based on the pricePlan
+      if (pricePlan === 'basic') {
+          unitAmount = formatAmountForStripe(5, 'usd');
+          productName = 'Basic subscription';
+      } else if (pricePlan === 'pro') {
+          unitAmount = formatAmountForStripe(10, 'usd');
+          productName = 'Pro subscription';
+      } else {
+          throw new Error('Invalid price plan')
+      }
+
+      const params = {
+          mode: 'subscription',
+          payment_method_types: ['card'],
+          line_items: [
+            {
+              price_data: {
+                currency: 'usd',
+                product_data: {
+                  name: productName,
                 },
-                quantity: 1,
+                unit_amount: unitAmount,
+                recurring: {
+                  interval: 'month',
+                  interval_count: 1,
+                },
               },
-            ],
-            success_url: `${req.headers.get('origin')}/result?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.get('origin')}/result?session_id={CHECKOUT_SESSION_ID}`,
-          }
+              quantity: 1,
+            },
+          ],
+          success_url: `${req.headers.get('origin')}/result?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${req.headers.get('origin')}/result?session_id={CHECKOUT_SESSION_ID}`,
+        }
 
-        const checkoutSession = await stripe.checkout.sessions.create(params)
+      const checkoutSession = await stripe.checkout.sessions.create(params)
 
-        return NextResponse.json(checkoutSession, {
-            status: 200,
-        })
-    } catch (error) {
-        console.error('Error creating checkout session:', error)
-        return new NextResponse(JSON.stringify({ error: { message: error.message } }), {
-            status: 500,
-        })
-    }
+      return NextResponse.json(checkoutSession, {
+          status: 200,
+      })
+  } catch (error) {
+      console.error('Error creating checkout session:', error)
+      return new NextResponse(JSON.stringify({ error: { message: error.message } }), {
+          status: 500,
+      })
+  }
 }

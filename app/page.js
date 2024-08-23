@@ -11,30 +11,35 @@ import Grid from '@mui/material/Grid';
 export default function Home() {
   const { signOut } = useClerk();
 
-  const handleSubmit = async () => {
-    const checkoutSession = await fetch('/api/checkout_session', {
-      method: 'POST',
-      headers: {
-        origin: 'https://localhost:3000',
-      },
-    })
+  const handleSubmit = async (pricePlan) => {
+    try {
+        const response = await fetch('/api/checkout_session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Ensure proper content type
+            },
+            body: JSON.stringify({ pricePlan }), // Include pricePlan in the request body
+        });
 
-    const checkoutSessionJson = await checkoutSession.json()
+        const checkoutSessionJson = await response.json();
 
-    if (checkoutSession.statusCode === 500) {
-      console.error(checkoutSession.message)
-      return
+        if (response.status !== 200) {
+            console.error(checkoutSessionJson.error.message);
+            return;
+        }
+
+        const stripe = await getStripe();
+        const { error } = await stripe.redirectToCheckout({
+            sessionId: checkoutSessionJson.id,
+        });
+
+        if (error) {
+            console.warn(error.message);
+        }
+    } catch (error) {
+        console.error('Error during checkout:', error);
     }
-
-    const stripe = await getStripe()
-    const {error} = await stripe.redirectToCheckout({
-      sessionId: checkoutSessionJson.id
-    })
-
-    if (error){
-      console.warn(error.message)
-    }
-  }
+  };
 
   return (
     <Container maxWidth={false}>
@@ -104,7 +109,12 @@ export default function Home() {
               <Typography>
                 Access to basic flashcard features and limited storage.
               </Typography>
-              <Button variant='contained' color='primary' sx={{ mt: 2 }}>
+              <Button
+                variant='contained'
+                color='primary'
+                sx={{ mt: 2 }}
+                onClick={() => handleSubmit('basic')} // Pass 'basic' to handleSubmit
+              >
                 Choose Basic
               </Button>
             </Box>
@@ -122,7 +132,12 @@ export default function Home() {
               <Typography>
                 Access to unlimited flashcard features and storage with priority support.
               </Typography>
-              <Button variant='contained' color='primary' sx={{ mt: 2 }} onClick={handleSubmit}>
+              <Button
+                variant='contained'
+                color='primary'
+                sx={{ mt: 2 }}
+                onClick={() => handleSubmit('pro')} // Pass 'pro' to handleSubmit
+              >
                 Choose Pro
               </Button>
             </Box>
@@ -130,5 +145,5 @@ export default function Home() {
         </Grid>
       </Box>
     </Container>
-  )
+  );
 }
