@@ -13,6 +13,9 @@ import {
     Card,
     CardActionArea,
     CardContent,
+    AppBar,
+    Toolbar,
+    Button
 } from '@mui/material'
 
 import { useSearchParams } from "next/navigation"
@@ -53,6 +56,13 @@ export default function Flashcard() {
 
     return (
         <Container maxWidth='100vw'>
+              <AppBar position="static">
+                    <Toolbar>
+                        <Typography variant = "h6" style={{flexGrow: 1}}>
+                        SmartCards</Typography>
+                                <Button href='/' color='inherit'>Home</Button>
+                    </Toolbar>
+                </AppBar>
             <Grid container spacing={3} sx={{ mt: 4 }}>
                 {flashcards.map((flashcard) => (
                     <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
