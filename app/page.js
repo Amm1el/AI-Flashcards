@@ -1,5 +1,6 @@
 'use client'
 
+import './globals.css';
 import Image from "next/image";
 import getStripe from '@/utils/get-stripe'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
@@ -42,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth={false}>
+    <Container className='container' maxWidth={false}>
       <Head>
         <title>SmartCards</title>
         <meta name="description" content="Create flashcards from your text"/>
@@ -54,12 +55,12 @@ export default function Home() {
             SmartCards
           </Typography>
           <SignedOut>
-            <Button color="inherit" href='/sign-in'>Login</Button>
-            <Button color="inherit" href='/sign-up'>Sign Up</Button>
+            <Button className='buttonnav' color="inherit" href='/sign-in'>Login</Button>
+            <Button className='buttonnav' color="inherit" href='/sign-up'>Sign Up</Button>
           </SignedOut>
           <SignedIn>
-            <Button color='inherit' href='/flashcards'>View Flashcards</Button>
-            <Button color="inherit" onClick={() => signOut()}>Sign Out</Button>
+            <Button className='buttonnav' color='inherit' href='/flashcards'>View Flashcards</Button>
+            <Button className='buttonnav' color="inherit" onClick={() => signOut()}>Sign Out</Button>
           </SignedIn>
         </Toolbar>
       </AppBar>
@@ -69,7 +70,7 @@ export default function Home() {
         <Typography variant="h5" gutterBottom>
           The easiest way to make flashcards from scratch
         </Typography>
-        <Button href='/generate' variant='contained' color='primary' sx={{ mt: 2 }}>
+        <Button className='button' href='/generate' variant='contained' color='primary' sx={{ mt: 2 }}>
           Get Started
         </Button>
       </Box>
@@ -110,6 +111,7 @@ export default function Home() {
                 Access to basic flashcard features and limited storage.
               </Typography>
               <Button
+                className='buttonprices'
                 variant='contained'
                 color='primary'
                 sx={{ mt: 2 }}
@@ -133,6 +135,7 @@ export default function Home() {
                 Access to unlimited flashcard features and storage with priority support.
               </Typography>
               <Button
+                className='buttonprices'
                 variant='contained'
                 color='primary'
                 sx={{ mt: 2 }}

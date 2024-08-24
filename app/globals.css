@@ -4,3 +4,36 @@
   padding: 0;
   margin: 0;
 }
+
+.button {
+  color: white;
+  transition-duration: 0.4s;
+  border-radius: 30px;
+}
+
+.button:hover {
+  color: white;
+  box-shadow: 0 0 0 3px black;
+}
+
+.buttonprices {
+  color: white;
+  transition-duration: 0.4s;
+  border-radius: 30px;
+}
+
+.buttonprices:hover {
+  box-shadow: 0 0 0 3px black;
+}
+
+.buttonnav {
+  color: white;
+  transition-duration: 0.7s;
+  border-radius: 25px;
+}
+
+.buttonnav:hover {
+  color: #2196f3;
+  background-color: white;
+  border-radius: 25px;
+}
