@@ -134,7 +134,7 @@ export default function Home() {
 
             {/* Right Section - 66% */}
             <Grid item xs={12} md={7}>
-              <Typography variant="h6" gutterBottom>What's Included:</Typography>
+              <Typography variant="h6" gutterBottom>Included:</Typography>
               <ul style={{ marginLeft: '20px' }}>
                 <li>Access to unlimited flashcards</li>
                 <li>Priority support</li>
