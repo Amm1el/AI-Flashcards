@@ -41,7 +41,7 @@
 
 .bigtitle {
   font-family: sans-serif;
-  font-size: 100px;
+  font-size: 8vw;
 }
 
 .gradient-text {
@@ -52,6 +52,6 @@
 }
 
 .subtitle {
-  font-size: 50px;
+  font-size: 5vw;
   font-family: sans-serif;
 }

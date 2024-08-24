@@ -97,57 +97,53 @@ export default function Home() {
         </Grid>
       </Box>
 
-      <Box sx={{ my: 6, textAlign: 'center' }}>
-        <Typography variant="h4" gutterBottom>Pricing</Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Box sx={{
-              p: 3,
-              border: '1px solid',
-              borderColor: 'grey.300',
-              borderRadius: 2,
-            }}>
-              <Typography variant="h5" gutterBottom>Basic</Typography>
-              <Typography variant="h6" gutterBottom>$5 Per Month</Typography>
-              <Typography>
-                Access to basic flashcard features and limited storage.
-              </Typography>
-              <Button
-                className='buttonprices'
-                variant='contained'
-                color='primary'
-                sx={{ mt: 2 }}
-                onClick={() => handleSubmit('basic')} // Pass 'basic' to handleSubmit
-              >
-                Choose Basic
-              </Button>
-            </Box>
-          </Grid>
 
-          <Grid item xs={12} md={6}>
-            <Box sx={{
-              p: 3,
-              border: '1px solid',
-              borderColor: 'grey.300',
-              borderRadius: 2,
-            }}>
-              <Typography variant="h5" gutterBottom>Pro</Typography>
-              <Typography variant="h6" gutterBottom>$10 Per Month</Typography>
-              <Typography>
-                Access to unlimited flashcard features and storage with priority support.
-              </Typography>
+            <Box sx={{ my: 6, display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{
+          p: 3,
+          border: '1px solid',
+          borderColor: 'grey.300',
+          borderRadius: 2,
+          maxWidth: 1000 // Increase the width of the box
+        }}>
+          <Grid container spacing={4} alignItems="center">
+            {/* Left Section - 33% */}
+            <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
+              <Typography variant="h5" gutterBottom>Premium</Typography>
+              <Typography variant="h6" gutterBottom>$5 Per Month</Typography>
               <Button
                 className='buttonprices'
                 variant='contained'
                 color='primary'
                 sx={{ mt: 2 }}
-                onClick={() => handleSubmit('pro')} // Pass 'pro' to handleSubmit
+                onClick={() => handleSubmit('premium')}
               >
-                Choose Pro
+                Join Now!
               </Button>
-            </Box>
+            </Grid>
+
+            {/* Divider Line */}
+            <Grid item xs={12} md={1}>
+              <Box sx={{
+                height: '100%',
+                width: '1px',
+                backgroundColor: 'grey.400',
+                mx: 'auto' // Center the line between the sections
+              }} />
+            </Grid>
+
+            {/* Right Section - 66% */}
+            <Grid item xs={12} md={7}>
+              <Typography variant="h6" gutterBottom>What's Included:</Typography>
+              <ul style={{ marginLeft: '20px' }}>
+                <li>Access to unlimited flashcards</li>
+                <li>Priority support</li>
+                <li>Unlimited storage</li>
+                <li>Exclusive content</li>
+              </ul>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Box>
     </Container>
   );
