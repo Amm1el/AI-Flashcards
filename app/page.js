@@ -66,12 +66,14 @@ export default function Home() {
       </AppBar>
 
       <Box sx={{ textAlign: 'center', my: 4 }}>
-        <Typography variant="h2" gutterBottom>Welcome to SmartCards</Typography>
-        <Typography variant="h5" gutterBottom>
-          The easiest way to make flashcards from scratch
+        <Typography className='bigtitle' variant="h1" gutterBottom>Welcome to <strong className='gradient-text'>SmartCards</strong></Typography>
+        <Typography className='subtitle' variant='h2' gutterBottom style={{ color: 'rgba(0, 0, 0, 0.7)' }}>
+          An AI-powered flashcard Generator!
         </Typography>
         <Button className='button' href='/generate' variant='contained' color='primary' sx={{ mt: 2 }}>
-          Get Started
+          <Typography className='gradient-text'>
+            <strong>Get Started</strong>
+          </Typography>
         </Button>
       </Box>
 
